@@ -1,8 +1,10 @@
 #ifndef _CHSTACK_
 #define _CHSTACK_
 
+typedef struct Stack Stack;
+
 Stack*  stack_new       ();
-int     stack_push      (Stack* stack, void obj);
+int     stack_push      (Stack* stack, void* obj);
 void*   stack_pop       (Stack* stack);
 void*   stack_peek      (Stack* stack);
 int     stack_size      (Stack* stack);
@@ -14,13 +16,13 @@ int     stack_destroy   (Stack* stack);
 struct Node{
     void* obj;
     struct Node* next;
-}
-typedef Node Node;
+};
+typedef struct Node Node;
 
-typedef struct{
+struct Stack{
     Node* head;
     size_t size;
-}Stack; 
+}; 
 
 static Node* node_new(Node* next, void* obj){
     Node* new = malloc(sizeof(Node));
@@ -34,8 +36,8 @@ Stack* stack_new(){
     if(new == NULL){
         return NULL;
     }
-    stack->head = NULL;
-    stack->size = 0;
+    new->head = NULL;
+    new->size = 0;
     return new;
 }
 
