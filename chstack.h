@@ -1,15 +1,21 @@
 #ifndef _CHSTACK_
 #define _CHSTACK_
-
+// Forward declaration
 typedef struct Stack Stack;
-
+// Returns a new empty stack
 Stack*  stack_new       ();
+// Pushes an object on top of the stack, returns 0 if succesful 1 otherwise.
 int     stack_push      (Stack* stack, void* obj);
+// Pops the object on top of the stack and returns it, returns null pointer if the stack is empty.
 void*   stack_pop       (Stack* stack);
+// Returns the object on top of the stack without removing it, returns null pointer if the stack is empty.
 void*   stack_peek      (Stack* stack);
-int     stack_size      (Stack* stack);
-int     stack_clear     (Stack* stack);
-int     stack_destroy   (Stack* stack);
+// Returns the size of the stack.
+size_t  stack_size      (Stack* stack);
+// Clears the contents of the stack, returns the number of elements cleared.
+size_t  stack_clear     (Stack* stack);
+// Destroys the stack freeing memory, returns the number of elements cleared.
+size_t  stack_destroy   (Stack* stack);
 
 #ifdef IMPLEMENT_CHSTACK
 
@@ -73,18 +79,18 @@ void* stack_peek(Stack* stack){
     return stack->head->obj;
 }
 
-int stack_size(Stack* stack){
+size_t stack_size(Stack* stack){
     if(stack == NULL){
         return 0;
     }
     return stack->size;
 }
 
-int stack_clear(Stack* stack){
+size_t stack_clear(Stack* stack){
     if(stack == NULL){
         return 0;
     }
-    int cleared = stack->size;
+    size_t cleared = stack->size;
     Node* current = stack->head;
     while(current != NULL){
         Node* delete = current;
@@ -96,8 +102,8 @@ int stack_clear(Stack* stack){
     return cleared;
 }
 
-int stack_destroy(Stack* stack){
-   int cleared = stack_clear(stack); 
+size_t stack_destroy(Stack* stack){
+   size_t cleared = stack_clear(stack); 
    free(stack);
    return cleared;
 }
