@@ -1,7 +1,9 @@
 #ifndef _CHSTACK_
 #define _CHSTACK_
+
 // Forward declaration
 typedef struct Stack Stack;
+
 // Returns a new empty stack
 Stack*  stack_new       ();
 // Pushes an object on top of the stack, returns 0 if succesful 1 otherwise.
@@ -15,7 +17,7 @@ size_t  stack_size      (Stack* stack);
 // Clears the contents of the stack, returns the number of elements cleared.
 size_t  stack_clear     (Stack* stack);
 // Destroys the stack freeing memory, returns the number of elements cleared.
-size_t  stack_destroy   (Stack* stack);
+size_t  stack_destroy   (Stack** stack);
 
 #ifdef IMPLEMENT_CHSTACK
 
@@ -102,9 +104,10 @@ size_t stack_clear(Stack* stack){
     return cleared;
 }
 
-size_t stack_destroy(Stack* stack){
-   size_t cleared = stack_clear(stack); 
-   free(stack);
+size_t stack_destroy(Stack** stack){
+   size_t cleared = stack_clear(*stack); 
+   free(*stack);
+   *stack = NULL;
    return cleared;
 }
 
