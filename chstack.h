@@ -73,7 +73,7 @@ void* stack_pop(Stack* stack){
 }
 
 void* stack_peek(Stack* stack){
-    if(stack == NULL){
+    if(stack == NULL || stack->head == NULL){
         return NULL;
     }
     return stack->head->obj;
