@@ -21,24 +21,29 @@ size_t  queue_destroy   (Queue** queue);
 
 #ifdef IMPLEMENT_CHQUEUE
 
-struct Node{
+#ifndef _CH_SIMPLE_NODE_
+#define _CH_SIMPLE_NODE_
+
+struct SNode{
     void* obj;
-    struct Node* next;
+    struct SNode* next;
 };
-typedef struct Node Node;
+typedef struct SNode SNode;
 
-struct Queue{
-    Node* tail;
-    Node* head;
-    size_t size;
-}; 
-
-static Node* node_new(Node* next, void* obj){
-    Node* new = malloc(sizeof(Node));
+static SNode* snode_new(SNode* next, void* obj){
+    SNode* new = malloc(sizeof(SNode));
     new->obj = obj;
     new->next = next;
     return new;
 }
+
+#endif
+
+struct Queue{
+    SNode* tail;
+    SNode* head;
+    size_t size;
+}; 
 
 Queue* queue_new(){
     Queue* new = malloc(sizeof(Queue));
@@ -52,7 +57,7 @@ int queue_enqueue(Queue* queue, void* obj){
     if(queue == NULL){
         return 1;
     }
-    Node* new = node_new(NULL, obj);
+    SNode* new = snode_new(NULL, obj);
     if(new == NULL){
         return 1;
     }
@@ -69,10 +74,10 @@ int queue_enqueue(Queue* queue, void* obj){
 
 void* queue_dequeue(Queue* queue){
     if(queue == NULL || queue->head == NULL){
-        return NULL
+        return NULL;
     }
     void* obj = queue->head->obj;
-    Node* delete = queue->head;
+    SNode* delete = queue->head;
     queue->head = queue->head->next;
     free(delete);
     queue->size--;
@@ -97,18 +102,18 @@ size_t queue_size(Queue* queue){
 }
 
 size_t queue_clear(Queue* queue){
-    if(queue == NULL){
+    if(queue == NULL || queue->head == NULL){
         return 0;
     }
     size_t cleared = queue->size;
-    Node* current = queue->head;
+    SNode* current = queue->head;
     while(current != NULL){
-        Node* delete = current;
+        SNode* delete = current;
         current = current->next;
         free(delete);
     }
-    queue->head == NULL; 
-    queue->tail == NULL;
+    queue->head = NULL; 
+    queue->tail = NULL;
     queue->size = 0;
     return cleared;
 }

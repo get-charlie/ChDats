@@ -21,23 +21,28 @@ size_t  stack_destroy   (Stack** stack);
 
 #ifdef IMPLEMENT_CHSTACK
 
-struct Node{
+#ifndef _CH_SIMPLE_NODE_
+#define _CH_SIMPLE_NODE_
+
+struct SNode{
     void* obj;
-    struct Node* next;
+    struct SNode* next;
 };
-typedef struct Node Node;
+typedef struct SNode SNode;
 
-struct Stack{
-    Node* head;
-    size_t size;
-}; 
-
-static Node* node_new(Node* next, void* obj){
-    Node* new = malloc(sizeof(Node));
+static SNode* snode_new(SNode* next, void* obj){
+    SNode* new = malloc(sizeof(SNode));
     new->obj = obj;
     new->next = next;
     return new;
 }
+
+#endif
+
+struct Stack{
+    SNode* head;
+    size_t size;
+}; 
 
 Stack* stack_new(){
     Stack* new = malloc(sizeof(Stack));
@@ -53,7 +58,7 @@ int stack_push(Stack* stack, void* obj){
     if(stack == NULL){
         return 1;
     }
-    Node* new = node_new(stack->head, obj);
+    SNode* new = snode_new(stack->head, obj);
     if(new == NULL){
         return 1;
     }
@@ -67,7 +72,7 @@ void* stack_pop(Stack* stack){
         return NULL;
     }
     void* obj = stack->head->obj;
-    Node* delete = stack->head;
+    SNode* delete = stack->head;
     stack->head = stack->head->next;
     free(delete);
     stack->size--;
@@ -89,13 +94,13 @@ size_t stack_size(Stack* stack){
 }
 
 size_t stack_clear(Stack* stack){
-    if(stack == NULL){
+    if(stack == NULL || stack->head == NULL){
         return 0;
     }
     size_t cleared = stack->size;
-    Node* current = stack->head;
+    SNode* current = stack->head;
     while(current != NULL){
-        Node* delete = current;
+        SNode* delete = current;
         current = current->next;
         free(delete);
     }
