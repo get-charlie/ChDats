@@ -1,6 +1,8 @@
 #ifndef _CHQUEUE_
 #define _CHQUEUE_
 
+#include <stdlib.h>
+
 // Forward declaration
 typedef struct Queue Queue;
 

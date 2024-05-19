@@ -1,6 +1,8 @@
 #ifndef _CHSTACK_
 #define _CHSTACK_
 
+#include <stdlib.h>
+
 // Forward declaration
 typedef struct Stack Stack;
 
