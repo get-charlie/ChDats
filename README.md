@@ -1,2 +1,2 @@
-# ChStack
-An stb style header only library for a generic stack  
+# ChDataStructures
+Sbt style header only libraries for common data structures.
