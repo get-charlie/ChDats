@@ -43,6 +43,7 @@ struct Stack{
     SNode* head;
     size_t size;
 }; 
+typedef struct Stack Stack;
 
 Stack* stack_new(){
     Stack* new = malloc(sizeof(Stack));

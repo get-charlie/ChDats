@@ -44,6 +44,7 @@ struct Queue{
     SNode* head;
     size_t size;
 }; 
+typedef struct Queue Queue;
 
 Queue* queue_new(){
     Queue* new = malloc(sizeof(Queue));
