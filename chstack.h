@@ -6,6 +6,7 @@
 // Forward declaration
 typedef struct Stack Stack;
 
+// API functions
 // Returns a new empty stack
 Stack*  stack_new       ();
 // Pushes an object on top of the stack, returns 0 if succesful 1 otherwise.
@@ -19,11 +20,13 @@ size_t  stack_size      (Stack* stack);
 // Clears the contents of the stack, returns the number of elements cleared.
 size_t  stack_clear     (Stack* stack);
 // Destroys the stack freeing memory, returns the number of elements cleared.
+// When calling this function you should pass reference the queue pointer.
 size_t  stack_destroy   (Stack** stack);
 
 #ifdef IMPLEMENT_CHSTACK
-
-#ifndef _CH_SIMPLE_NODE_
+// If you include chstack.h and chqueue.h simultaneously the node definition and the helper function will
+// be included just once.
+#ifndef _CH_SIMPLE_NODE_ 
 #define _CH_SIMPLE_NODE_
 
 struct SNode{
@@ -32,6 +35,7 @@ struct SNode{
 };
 typedef struct SNode SNode;
 
+// Helper function
 static SNode* snode_new(SNode* next, void* obj){
     SNode* new = malloc(sizeof(SNode));
     new->obj = obj;

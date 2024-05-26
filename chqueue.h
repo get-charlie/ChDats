@@ -6,6 +6,7 @@
 // Forward declaration
 typedef struct Queue Queue;
 
+// API functions.
 // Create a new empty queue.
 Queue*  queue_new       ();
 // Enqueue an object to the end of the queue, returns 0 if succesful, 1 otherwise.
@@ -19,19 +20,21 @@ size_t  queue_size      (Queue* queue);
 // Clears the queue without destroying it, returns the number of elements cleared.
 size_t  queue_clear     (Queue* queue);
 // Destroys the queue freeing memory, returns the number of elements cleared.
+// When calling this function you should pass reference the queue pointer.
 size_t  queue_destroy   (Queue** queue);
 
 #ifdef IMPLEMENT_CHQUEUE
-
+// If you include chstack.h and chqueue.h simultaneously the node definition and the helper function will
+// be included just once.
 #ifndef _CH_SIMPLE_NODE_
 #define _CH_SIMPLE_NODE_
-
 struct SNode{
     void* obj;
     struct SNode* next;
 };
 typedef struct SNode SNode;
 
+// Helper function.
 static SNode* snode_new(SNode* next, void* obj){
     SNode* new = malloc(sizeof(SNode));
     new->obj = obj;
