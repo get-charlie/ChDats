@@ -1,3 +1,7 @@
+/*
+Simple Sbt style header only library for a generic stack in C.
+Made by get-charlie
+*/
 #ifndef _CHSTACK_
 #define _CHSTACK_
 
@@ -20,10 +24,12 @@ size_t  stack_size      (Stack* stack);
 // Clears the contents of the stack, returns the number of elements cleared.
 size_t  stack_clear     (Stack* stack);
 // Destroys the stack freeing memory, returns the number of elements cleared.
-// When calling this function you should pass reference the queue pointer.
+// When calling this function you should pass by reference the stack pointer.
 size_t  stack_destroy   (Stack** stack);
 
+// In your header file you should type '#define IMPLEMENT_CHSTACK' to create the implementation.
 #ifdef IMPLEMENT_CHSTACK
+
 // If you include chstack.h and chqueue.h simultaneously the node definition and the helper function will
 // be included just once.
 #ifndef _CH_SIMPLE_NODE_ 

@@ -1,3 +1,7 @@
+/*
+Simple Sbt style header only library for a generic queue in C.
+Made by get-charlie
+*/
 #ifndef _CHQUEUE_
 #define _CHQUEUE_
 
@@ -20,9 +24,10 @@ size_t  queue_size      (Queue* queue);
 // Clears the queue without destroying it, returns the number of elements cleared.
 size_t  queue_clear     (Queue* queue);
 // Destroys the queue freeing memory, returns the number of elements cleared.
-// When calling this function you should pass reference the queue pointer.
+// When calling this function you should pass by reference the queue pointer.
 size_t  queue_destroy   (Queue** queue);
 
+// In your header file you should type '#define IMPLEMENT_CHQUEUE' to create the implementation.
 #ifdef IMPLEMENT_CHQUEUE
 // If you include chstack.h and chqueue.h simultaneously the node definition and the helper function will
 // be included just once.
