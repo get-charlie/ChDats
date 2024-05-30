@@ -27,8 +27,8 @@ size_t  queue_clear     (Queue* queue);
 // When calling this function you should pass by reference the queue pointer.
 size_t  queue_destroy   (Queue** queue);
 
-// In your header file you should type '#define IMPLEMENT_CHQUEUE' to create the implementation.
-#ifdef IMPLEMENT_CHQUEUE
+// In your header file you should type '#define IMPLEMENT_CHDATS' to create the implementation.
+#ifdef IMPLEMENT_CHDATS
 // If you include chstack.h and chqueue.h simultaneously the node definition and the helper function will
 // be included just once.
 #ifndef _CH_SIMPLE_NODE_
@@ -136,5 +136,5 @@ size_t queue_destroy(Queue** queue){
     return cleared;
 }
 
-#endif // IMPLEMENT_CHQUEUE
+#endif // IMPLEMENT_CHDATS
 #endif

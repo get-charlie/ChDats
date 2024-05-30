@@ -27,8 +27,8 @@ size_t  stack_clear     (Stack* stack);
 // When calling this function you should pass by reference the stack pointer.
 size_t  stack_destroy   (Stack** stack);
 
-// In your header file you should type '#define IMPLEMENT_CHSTACK' to create the implementation.
-#ifdef IMPLEMENT_CHSTACK
+// In your header file you should type '#define IMPLEMENT_CHDATS' to create the implementation.
+#ifdef IMPLEMENT_CHDATS
 
 // If you include chstack.h and chqueue.h simultaneously the node definition and the helper function will
 // be included just once.
@@ -129,5 +129,5 @@ size_t stack_destroy(Stack** stack){
    return cleared;
 }
 
-#endif // IMPLEMENT_CHSTACK
+#endif // IMPLEMENT_CHDATS
 #endif
